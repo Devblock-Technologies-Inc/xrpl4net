@@ -35,6 +35,6 @@ namespace Xrpl4net.Core
 		/// </summary>
 		public List<Channel> Channels { get; } = new List<Channel>();
 
-		
+
 	}
 }
