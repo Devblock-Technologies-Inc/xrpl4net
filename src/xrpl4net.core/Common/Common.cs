@@ -2,6 +2,12 @@
 
 namespace Xrpl4net.Core
 {
+    class XRP
+    {
+        [JsonProperty("currency")]
+        string Currency => "XRP";
+    }
+
     class IssuedCurrency
     {
 
