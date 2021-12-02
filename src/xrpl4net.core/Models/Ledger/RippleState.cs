@@ -1,31 +1,46 @@
-﻿namespace Xrpl4net.Core
+﻿using Newtonsoft.Json;
+
+namespace Xrpl4net.Core
 {
     class RippleState
     {
+        [JsonProperty("ledgerEntryType", NullValueHandling = NullValueHandling.Ignore)]
         string LedgerEntryType => "RippleState";
 
+        [JsonProperty("flags", NullValueHandling = NullValueHandling.Ignore)]
         double Flags { get; set; }
 
+        [JsonProperty("balance", NullValueHandling = NullValueHandling.Ignore)]
         IssuedCurrencyAmount Balance { get; set; }
 
+        [JsonProperty("lowLimit", NullValueHandling = NullValueHandling.Ignore)]
         IssuedCurrencyAmount LowLimit { get; set; }
 
+        [JsonProperty("highLimit", NullValueHandling = NullValueHandling.Ignore)]
         IssuedCurrencyAmount HighLimit { get; set; }
 
+        [JsonProperty("previousTxnID", NullValueHandling = NullValueHandling.Ignore)]
         string PreviousTxnID { get; set; }
 
+        [JsonProperty("previousTxnLgrSeq", NullValueHandling = NullValueHandling.Ignore)]
         double PreviousTxnLgrSeq { get; set; }
 
+        [JsonProperty("lowNode", NullValueHandling = NullValueHandling.Ignore)]
         string LowNode { get; set; }
 
+        [JsonProperty("highNode", NullValueHandling = NullValueHandling.Ignore)]
         string HighNode { get; set; }
 
+        [JsonProperty("lowQualityIn", NullValueHandling = NullValueHandling.Ignore)]
         double? LowQualityIn { get; set; }
 
+        [JsonProperty("lowQualityOut", NullValueHandling = NullValueHandling.Ignore)]
         double? LowQualityOut { get; set; }
 
+        [JsonProperty("highQualityIn", NullValueHandling = NullValueHandling.Ignore)]
         double? HighQualityIn { get; set; }
 
+        [JsonProperty("highQualityOut", NullValueHandling = NullValueHandling.Ignore)]
         double? HighQualityOut { get; set; }
 
     }
