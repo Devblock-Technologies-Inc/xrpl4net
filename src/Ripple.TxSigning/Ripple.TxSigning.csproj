@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>    
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Ripple.NetCore</PackageId>
+    <Authors>Chris Williams, Ripple Inc.</Authors>    
+    <Company>CloudScope, LLC</Company>
+    <Product>Ripple.NetCore</Product>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/chriswill/ripple-netcore</RepositoryUrl>
+    <Description>Ripple.NetCore is a set of .Net libraries for working with the Ripple network.  The only supported functionality at this time is offline signing of transactions.</Description>
+    <PackageProjectUrl>https://github.com/chriswill/ripple-netcore</PackageProjectUrl>
+    <PackageTags>Cryptocurrencies;XRP;Ripple</PackageTags>
+    <Copyright>2021, CloudScope LLC</Copyright>
+    <PackageReleaseNotes>Updated to include support for escrow and payment channel transactions</PackageReleaseNotes>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1.1</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ripple.Core\Ripple.Core.csproj" />
+    <ProjectReference Include="..\Ripple.Signing\Ripple.Signing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  
+</Project>
