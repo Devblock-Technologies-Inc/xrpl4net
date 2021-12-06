@@ -55,5 +55,21 @@ namespace Xrpl4net.Core
         double? TransferRate { get; set; }
 
     }
+
+    enum AccountSetAsfFlags
+    {
+        /** The same as SetFlag: asfRequireDest. */
+        TfRequireDestTag = 0x00010000,
+        /** The same as ClearFlag: asfRequireDest. */
+        TfOptionalDestTag = 0x00020000,
+        /** The same as SetFlag: asfRequireAuth. */
+        TfRequireAuth = 0x00040000,
+        /** The same as ClearFlag: asfRequireAuth. */
+        TfOptionalAuth = 0x00080000,
+        /** The same as SetFlag: asfDisallowXRP. */
+        TfDisallowXRP = 0x00100000,
+        /** The same as ClearFlag: asfDisallowXRP. */
+        TfAllowXRP = 0x00200000,
+    }
 }
 
