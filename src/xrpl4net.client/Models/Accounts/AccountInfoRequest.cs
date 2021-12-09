@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ripple.HttpApi.Models.Accounts
+namespace Xrpl4net.Client.Models.Accounts
 {
     public class AccountInfoRequest : BaseRequest
     {
@@ -20,5 +20,4 @@ namespace Ripple.HttpApi.Models.Accounts
 
         public string ledger_index { get; set; }
     }
-
 }

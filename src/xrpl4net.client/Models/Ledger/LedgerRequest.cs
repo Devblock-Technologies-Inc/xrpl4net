@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ripple.HttpApi.Models.Ledger
+namespace Xrpl4net.Client.Models.Ledger
 {
     public class LedgerRequest : BaseRequest
     {
@@ -20,7 +20,7 @@ namespace Ripple.HttpApi.Models.Ledger
 
         public bool expand { get; set; }
 
-        public bool owner_funds { get; set; }   
+        public bool owner_funds { get; set; }
 
         public string ledger_index { get; set; }
     }

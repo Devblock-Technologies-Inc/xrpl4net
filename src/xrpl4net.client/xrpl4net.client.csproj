@@ -5,4 +5,12 @@
     <RootNamespace>Xrpl4net.Client</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Transactions\" />
+  </ItemGroup>
+
 </Project>

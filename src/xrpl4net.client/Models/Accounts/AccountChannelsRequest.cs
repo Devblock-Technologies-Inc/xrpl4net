@@ -1,13 +1,18 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Ripple.HttpApi.Models.Accounts
+namespace Xrpl4net.Client.Models.Accounts
 {
     public class AccountChannelsRequest : BaseRequest
     {
         public override string method => "account_channels";
 
         [JsonProperty("params")]
-        public AccountChannelsRequestParams[] Params { get;set;}
+        public AccountChannelsRequestParams[] Params { get; set; }
     }
 
     public class AccountChannelsRequestParams

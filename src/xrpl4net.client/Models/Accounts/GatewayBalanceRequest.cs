@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ripple.HttpApi.Models.Accounts
+namespace Xrpl4net.Client.Models.Accounts
 {
     public class GatewayBalanceRequest : BaseRequest
     {
