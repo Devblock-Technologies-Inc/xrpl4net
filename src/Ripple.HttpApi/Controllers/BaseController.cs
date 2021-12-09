@@ -3,7 +3,7 @@
 namespace Ripple.HttpApi.Controllers
 {
     [ApiController]
-    [Route("api/onesign/[controller]")]
+    [Route("api/devblock/[controller]")]
     public abstract class BaseController : Controller
     {
     }
