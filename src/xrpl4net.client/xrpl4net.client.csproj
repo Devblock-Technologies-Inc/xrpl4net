@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Transactions\" />
+    <Folder Include="Models\BookO\" />
   </ItemGroup>
 
 </Project>

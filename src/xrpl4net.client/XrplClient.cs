@@ -9,6 +9,7 @@ using Xrpl4net.Client.Http;
 using Xrpl4net.Client.Models;
 using Xrpl4net.Client.Models.Accounts;
 using Xrpl4net.Client.Models.Ledger;
+using Xrpl4net.Client.Models.Transactions;
 
 namespace Xrpl4net.Client
 {
@@ -94,6 +95,26 @@ namespace Xrpl4net.Client
         }
 
         public async Task<dynamic> GetLedgerCurrent(LedgerCurrentRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetSubmitRequest(SubmitRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetTXRequest(TXRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetTXHistory(TXHistory input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetSubmitMultisigned(SubmitRequest input)
         {
             return await GetJsonFromContent(input);
         }
