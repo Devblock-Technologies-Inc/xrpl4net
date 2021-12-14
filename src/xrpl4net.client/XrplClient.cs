@@ -9,6 +9,9 @@ using Xrpl4net.Client.Http;
 using Xrpl4net.Client.Models;
 using Xrpl4net.Client.Models.Accounts;
 using Xrpl4net.Client.Models.Ledger;
+using Xrpl4net.Client.Models.PathOrderBook;
+using Xrpl4net.Client.Models.PaymentChannel;
+using Xrpl4net.Client.Models.ServerInfo;
 using Xrpl4net.Client.Models.Transactions;
 
 namespace Xrpl4net.Client
@@ -115,6 +118,56 @@ namespace Xrpl4net.Client
         }
 
         public async Task<dynamic> GetSubmitMultisigned(SubmitRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetBookOffers(BookOffersRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetDepositAuthorized(DepositAuthorizedRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetPathFind(PathFindRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetRipplePathFind(RipplePathFindRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetChannelAuthorize(ChannelAuthorizeRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetChannelVerify(ChannelVerifyRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetFee(FeeRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetManifest(ManifestRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetServerInfo(ServerInfoRequest input)
+        {
+            return await GetJsonFromContent(input);
+        }
+
+        public async Task<dynamic> GetServerState(ServerStateRequest input)
         {
             return await GetJsonFromContent(input);
         }
