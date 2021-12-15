@@ -14,7 +14,11 @@ namespace Xrpl4net.Client.Models.Accounts
     {
         public string account { get; set; }
 
+        public int account_index { get; set; }  
+
         public string ledger_hash { get; set; }
+
+        public string ledger_index { get; set; }
 
         public bool strict { get; set; }
     }
