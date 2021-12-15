@@ -179,7 +179,7 @@ namespace Xrpl4net.Client
         private async Task<dynamic> GetJsonFromContent<T>(T input) where T : BaseRequest
         {
             var request = JsonConvert.SerializeObject(input);
-            var response = await HttpClientExtensions.PostJsonContent(_uri, _httpClient, request);
+            var response = await _httpClient.PostJsonContent(_uri, request);
             var result = JsonConvert.DeserializeObject<dynamic>(response);
             return result;
         }
