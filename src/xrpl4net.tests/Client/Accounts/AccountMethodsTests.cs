@@ -36,32 +36,8 @@ namespace Xrpl4net.Tests.Client.Accounts
                 }.ToArray()
             };
 
-            var response = await _xrplClient.GetAccountChannels(accountChannelRequest);
-            string result = JsonConvert.SerializeObject(response["result"]);
-            var accountChannelResponse = JsonConvert.DeserializeObject<AccountChannelsResponse>(result);
-            accountChannelResponse.Should().NotBeNull();
-        }
-
-        [Test]
-        public async Task CanGetAccountCurrencies()
-        {
-            var currenciesRequest = new AccountCurrenciesRequest
-            {
-                Params = new List<AccountCurrenciesRequestParams>
-                {
-                    new AccountCurrenciesRequestParams
-                    {
-                        account = "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-                        account_index = 0,
-                        ledger_index = "validated",
-                        strict = true
-                    }
-                }.ToArray()
-            };
-            var response = await _xrplClient.GetAccountCurrencies(currenciesRequest);
-            string result = JsonConvert.SerializeObject(response["result"]);
-            var accountCurrenciesResponse = JsonConvert.DeserializeObject<AccountCurrenciesResponse>(result);
-            accountCurrenciesResponse.Should().NotBeNull();
+            var response = await _xrplClient.AccountChannels(accountChannelRequest);
+            response.result.Should().NotBeNull();
         }
 
         [Test]
@@ -69,8 +45,8 @@ namespace Xrpl4net.Tests.Client.Accounts
         {
             var request = new AccountInfoRequest
             {
-                Params = new List<AccountInfoRequestParams> 
-                { 
+                Params = new List<AccountInfoRequestParams>
+                {
                     new AccountInfoRequestParams
                     {
                         account = "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
@@ -80,25 +56,89 @@ namespace Xrpl4net.Tests.Client.Accounts
                     }
                 }.ToArray()
             };
-            var response = await _xrplClient.GetAccountInfo(request);
-            string json = JsonConvert.SerializeObject(response["result"]);
-            var expectedResult = new AccountInfoResponse
+            var response = await _xrplClient.AccountInfo(request);
+            response.result.Should().NotBeNull();
+        }
+
+        [Test]
+        public async Task CanGetAccountObjects()
+        {
+            var request = new AccountObjectsRequest
             {
-                account_data = new AccountData
+                Params = new List<AccountObjectsRequestParams>
                 {
-                    Account = "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
-                    Balance = "9977",
-                    Flags = 1048576,
-                    index = "92FA6A9FC8EA6018D5D16532D7795C91BFB0831355BDFDA177E86C8BF997985F",
-                    LedgerEntryType = "AccountRoot",
-                    RegularKey = "rhLkGGNZdjSpnHJw4XAFw1Jy7PD8TqxoET"
-                },
-                ledger_current_index = 68349087,
-                status = "success",
-                validated = false
+                    new AccountObjectsRequestParams
+                    {
+                        account = "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+                        type = "state",
+                        ledger_index = "validated",
+                        deletion_blockers_only = true,
+                        limit = 10
+                    }
+                }.ToArray()
             };
-            var result = JsonConvert.DeserializeObject<AccountInfoResponse>(json);
-            result.Should().NotBeNull();
+            var response = await _xrplClient.AccountObjects(request);
+            response.result.Should().NotBeNull();
+        }
+
+        [Test]
+        public async Task CanGetAccountOffers()
+        {
+            var request = new AccountOffersRequest
+            {
+                Params = new List<AccountOffersRequestParams>
+                {
+                    new AccountOffersRequestParams
+                    {
+                        account = "rpP2JgiMyTF5jR5hLG3xHCPi1knBb1v9cM"
+                    }
+                }.ToArray()
+            };
+            var response = await _xrplClient.AccountOffers(request);
+            response.result.Should().NotBeNull();
+        }
+
+        [Test]
+        public async Task CanGetAccountTX()
+        {
+            var request = new AccountTXRequest
+            {
+                Params = new List<AccountTXRequestParams>
+                {
+                    new AccountTXRequestParams
+                    {
+                        account = "rLNaPoKeeBjZe2qs6x52yVPZpZ8td4dc6w",
+                        binary = false,
+                        forward = false,
+                        limit = 2 ,
+                        ledger_index_max = -1,
+                        ledger_index_min = -1
+                    }
+                }.ToArray()
+            };
+            var response = await _xrplClient.AccountTX(request);
+            response.result.Should().NotBeNull();
+        }
+
+        [Test]
+        public async Task CanGetNorippleCheck()
+        {
+            var request = new NorippleCheckRequest
+            {
+                Params = new List<NorippleCheckRequestParams>
+                {
+                    new NorippleCheckRequestParams
+                    {
+                        account = "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+                        ledger_index = "current",
+                        limit = 2,
+                        role = "gateway",
+                        transactions = true
+                    }
+                }.ToArray()
+            };
+            var response = await _xrplClient.NorippleCheck(request);
+            response.result.Should().NotBeNull();
         }
     }
 }

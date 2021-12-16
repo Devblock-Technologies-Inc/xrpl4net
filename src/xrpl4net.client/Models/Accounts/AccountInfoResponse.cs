@@ -8,6 +8,11 @@ namespace Xrpl4net.Client.Models.Accounts
 {
     public class AccountInfoResponse : BaseResponse
     {
+        public AccountInfoResult result { get; set; }
+    }
+
+    public class AccountInfoResult
+    {
         public int ledger_current_index { get; set; }
 
         public AccountData account_data { get; set; }

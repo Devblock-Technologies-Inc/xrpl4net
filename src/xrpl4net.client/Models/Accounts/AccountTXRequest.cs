@@ -15,11 +15,13 @@ namespace Xrpl4net.Client.Models.Accounts
         public AccountTXRequestParams[] Params { get; set; }
     }
 
-    public class AccountTXRequestParams
+    public class AccountTXRequestParams : BaseRequestParams
     {
         public string account { get; set; }
 
-        public string ledger_index { get; set; }
+        public int ledger_index_min { get; set; }
+
+        public int ledger_index_max { get; set; }
 
         public bool binary { get; set; }
 

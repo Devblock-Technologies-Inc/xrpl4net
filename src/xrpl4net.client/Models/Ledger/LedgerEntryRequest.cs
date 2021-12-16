@@ -7,10 +7,10 @@ namespace Xrpl4net.Client.Models.Ledger
         public override string method => "ledger_entry";
 
         [JsonProperty("params")]
-        public LedgerEntryParams[] Params { get; set; }
+        public LedgerEntryRequestParams[] Params { get; set; }
     }
 
-    public class LedgerEntryParams
+    public class LedgerEntryRequestParams
     {
         public string index { get; set; }   
 

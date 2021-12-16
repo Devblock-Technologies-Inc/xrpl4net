@@ -7,10 +7,10 @@ namespace Xrpl4net.Client.Models.Ledger
         public override string method => "ledger_closed";
 
         [JsonProperty("params")]
-        public LedgerClosedParams[] Params { get; set; }
+        public LedgerClosedRequestParams[] Params { get; set; }
     }
 
-    public class LedgerClosedParams
+    public class LedgerClosedRequestParams
     {
         public string index { get; set; }
 

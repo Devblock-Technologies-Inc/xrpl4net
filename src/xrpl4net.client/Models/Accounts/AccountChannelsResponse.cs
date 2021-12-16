@@ -8,6 +8,11 @@ namespace Xrpl4net.Client.Models.Accounts
 {
     public class AccountChannelsResponse : BaseResponse
     {
+        public AccountChannelsResult result { get; set; }
+    }
+
+    public class AccountChannelsResult
+    {
         public string account { get; set; }
 
         public Channels[] channels { get; set; }

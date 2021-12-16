@@ -10,13 +10,12 @@ namespace Xrpl4net.Client.Models.Accounts
         public AccountObjectsRequestParams[] Params { get; set; }
     }
 
-    public class AccountObjectsRequestParams
+    public class AccountObjectsRequestParams : BaseRequestParams
     {
         public string account { get; set; }
 
         public string type { get; set; }
 
-        public string ledger_index { get; set; }
 
         public bool deletion_blockers_only { get; set; }
     }

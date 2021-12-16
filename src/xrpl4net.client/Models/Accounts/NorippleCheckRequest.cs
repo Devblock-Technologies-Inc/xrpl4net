@@ -10,14 +10,11 @@ namespace Xrpl4net.Client.Models.Accounts
         public NorippleCheckRequestParams[] Params { get; set; }
     }
 
-    public class NorippleCheckRequestParams
+    public class NorippleCheckRequestParams : BaseRequestParams
     {
         public string account { get; set; }
 
         public string role { get; set; }
-
-        public string ledger_index { get; set; }
-
         public bool transactions { get; set; }
     }
 }

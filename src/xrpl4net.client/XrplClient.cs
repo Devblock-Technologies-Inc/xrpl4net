@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xrpl4net.Client.Http;
 using Xrpl4net.Client.Models;
@@ -37,150 +33,157 @@ namespace Xrpl4net.Client
 
         #region Methods
 
-        public async Task<dynamic> GetAccountChannels(AccountChannelsRequest input)
+        public async Task<AccountChannelsResponse> AccountChannels(AccountChannelsRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<AccountChannelsRequest, AccountChannelsResponse>(input);
         }
 
-        public async Task<dynamic> GetAccountInfo(AccountInfoRequest input)
+        public async Task<AccountInfoResponse> AccountInfo(AccountInfoRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<AccountInfoRequest, AccountInfoResponse>(input);
         }
 
-        public async Task<dynamic> GetGatewayBalance(GatewayBalanceRequest input)
+        public async Task<GatewayBalanceResponse> GatewayBalance(GatewayBalanceRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<GatewayBalanceRequest, GatewayBalanceResponse>(input);
         }
 
-        public async Task<dynamic> GetAccountCurrencies(AccountCurrenciesRequest input)
+        public async Task<AccountCurrenciesResponse> AccountCurrencies(AccountCurrenciesRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<AccountCurrenciesRequest, AccountCurrenciesResponse>(input);
         }
 
-        public async Task<dynamic> GetAccountLines(AccountLinesRequest input)
+        public async Task<AccountLinesResponse> AccountLines(AccountLinesRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<AccountLinesRequest, AccountLinesResponse>(input);
         }
 
-        public async Task<dynamic> GetAccountObjects(AccountObjectsRequest input)
+        public async Task<AccountObjectsResponse> AccountObjects(AccountObjectsRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<AccountObjectsRequest, AccountObjectsResponse>(input);
         }
 
-        public async Task<dynamic> GetAccountOffers(AccountOffersRequest input)
+        public async Task<AccountOffersResponse> AccountOffers(AccountOffersRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<AccountOffersRequest, AccountOffersResponse>(input);
         }
 
-        public async Task<dynamic> GetAccountTX(AccountTXRequest input)
+        public async Task<AccountTXResponse> AccountTX(AccountTXRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<AccountTXRequest, AccountTXResponse>(input);
         }
 
-        public async Task<dynamic> GetNorippleCheck(NorippleCheckRequest input)
+        public async Task<NoRippleCheckResponse> NorippleCheck(NorippleCheckRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<NorippleCheckRequest, NoRippleCheckResponse>(input);
         }
 
-        public async Task<dynamic> GetLedger(LedgerRequest input)
+        public async Task<LedgerResponse> Ledger(LedgerRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<LedgerRequest, LedgerResponse>(input);
         }
 
-        public async Task<dynamic> GetLedgerEntryRequest(LedgerEntryRequest input)
+        public async Task<LedgerEntryResponse> LedgerEntryRequest(LedgerEntryRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<LedgerEntryRequest, LedgerEntryResponse>(input);
         }
 
-        public async Task<dynamic> GetLedgerClosed(LedgerClosedRequest input)
+        public async Task<LedgerClosedResponse> LedgerClosed(LedgerClosedRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<LedgerClosedRequest, LedgerClosedResponse>(input);
         }
 
-        public async Task<dynamic> GetLedgerCurrent(LedgerCurrentRequest input)
+        public async Task<LedgerCurrentResponse> LedgerCurrent(LedgerCurrentRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<LedgerCurrentRequest, LedgerCurrentResponse>(input);
         }
 
-        public async Task<dynamic> GetSubmitRequest(SubmitRequest input)
+        public async Task<LedgerDataResponse> LedgerData(LedgerDataResquest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<LedgerDataResquest, LedgerDataResponse>(input);
         }
 
-        public async Task<dynamic> GetTXRequest(TXRequest input)
+        public async Task<SubmitResponse> Submit(SubmitRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<SubmitRequest, SubmitResponse>(input);
         }
 
-        public async Task<dynamic> GetTXHistory(TXHistory input)
+        public async Task<SubmitMultisignedResponse> SubmitMultisigned(SubmitMultisignedRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<SubmitMultisignedRequest, SubmitMultisignedResponse>(input);
         }
 
-        public async Task<dynamic> GetSubmitMultisigned(SubmitRequest input)
+        public async Task<TXResponse> TXRequest(TXRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<TXRequest, TXResponse>(input);
         }
 
-        public async Task<dynamic> GetBookOffers(BookOffersRequest input)
+        public async Task<TXHistoryResponse> TXHistory(TXHistoryRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<TXHistoryRequest, TXHistoryResponse>(input);
         }
 
-        public async Task<dynamic> GetDepositAuthorized(DepositAuthorizedRequest input)
+        public async Task<BookOffersResponse> BookOffers(BookOffersRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<BookOffersRequest, BookOffersResponse>(input);
         }
 
-        public async Task<dynamic> GetPathFind(PathFindRequest input)
+        public async Task<DepositAuthorizedResponse> DepositAuthorized(DepositAuthorizedRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<DepositAuthorizedRequest, DepositAuthorizedResponse>(input);
         }
 
-        public async Task<dynamic> GetRipplePathFind(RipplePathFindRequest input)
+        public async Task<PathFindResponse> PathFind(PathFindRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<PathFindRequest, PathFindResponse>(input);
         }
 
-        public async Task<dynamic> GetChannelAuthorize(ChannelAuthorizeRequest input)
+        public async Task<RipplePathFindResponse> RipplePathFind(RipplePathFindRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<RipplePathFindRequest, RipplePathFindResponse>(input);
         }
 
-        public async Task<dynamic> GetChannelVerify(ChannelVerifyRequest input)
+        public async Task<ChannelAuthorizeResponse> ChannelAuthorize(ChannelAuthorizeRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<ChannelAuthorizeRequest, ChannelAuthorizeResponse>(input);
         }
 
-        public async Task<dynamic> GetFee(FeeRequest input)
+        public async Task<ChannelVerifyResponse> ChannelVerify(ChannelVerifyRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<ChannelVerifyRequest, ChannelVerifyResponse>(input);
         }
 
-        public async Task<dynamic> GetManifest(ManifestRequest input)
+        public async Task<FeeResponse> Fee(FeeRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<FeeRequest, FeeResponse>(input);
         }
 
-        public async Task<dynamic> GetServerInfo(ServerInfoRequest input)
+        public async Task<ManifestResponse> Manifest(ManifestRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<ManifestRequest, ManifestResponse>(input);
         }
 
-        public async Task<dynamic> GetServerState(ServerStateRequest input)
+        public async Task<ServerInfoResponse> ServerInfo(ServerInfoRequest input)
         {
-            return await GetJsonFromContent(input);
+            return await GetJsonFromContent<ServerInfoRequest, ServerInfoResponse>(input);
+        }
+
+        public async Task<ServerStateResponse> ServerState(ServerStateRequest input)
+        {
+            return await GetJsonFromContent<ServerStateRequest, ServerStateResponse>(input);
         }
 
         #endregion
 
         #region Utils
 
-        private async Task<dynamic> GetJsonFromContent<T>(T input) where T : BaseRequest
+        private async Task<Tm> GetJsonFromContent<T, Tm>(T input) 
+            where T : BaseRequest 
+            where Tm : class
         {
             var request = JsonConvert.SerializeObject(input);
             var response = await HttpClientExtensions.PostJsonContent(_uri, _httpClient, request);
-            var result = JsonConvert.DeserializeObject<dynamic>(response);
+            var result = JsonConvert.DeserializeObject<Tm>(response);
             return result;
         }
 
