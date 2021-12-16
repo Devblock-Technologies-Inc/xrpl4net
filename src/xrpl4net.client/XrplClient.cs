@@ -177,13 +177,14 @@ namespace Xrpl4net.Client
 
         #region Utils
 
-        private async Task<Tm> GetJsonFromContent<T, Tm>(T input) 
-            where T : BaseRequest 
+        private async Task<Tm> GetJsonFromContent<T, Tm>(T input)
+            where T : BaseRequest
             where Tm : class
         {
             var request = JsonConvert.SerializeObject(input);
-            var response = await HttpClientExtensions.PostJsonContent(_uri, _httpClient, request);
+            var response = await HttpClientExtensions.PostJsonContent(_httpClient, _uri, request);
             var result = JsonConvert.DeserializeObject<Tm>(response);
+
             return result;
         }
 
