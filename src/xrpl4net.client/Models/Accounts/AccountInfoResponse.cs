@@ -40,5 +40,7 @@ namespace Xrpl4net.Client.Models.Accounts
         public uint Flags { get; set; }
 
         public string RegularKey { get; set; }
+
+        public int Sequence { get; set; }
     }
 }

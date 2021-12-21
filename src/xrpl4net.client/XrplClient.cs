@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Xrpl4net.Client.Http;
 using Xrpl4net.Client.Models;
 using Xrpl4net.Client.Models.Accounts;
+using Xrpl4net.Client.Models.KeyGeneration;
 using Xrpl4net.Client.Models.Ledger;
 using Xrpl4net.Client.Models.PathOrderBook;
 using Xrpl4net.Client.Models.PaymentChannel;
@@ -171,6 +172,16 @@ namespace Xrpl4net.Client
         public async Task<ServerStateResponse> ServerState(ServerStateRequest input)
         {
             return await GetJsonFromContent<ServerStateRequest, ServerStateResponse>(input);
+        }
+
+        public async Task<ValidationCreateResponse> ValidationCreate(ValidationCreateRequest input)
+        {
+            return await GetJsonFromContent<ValidationCreateRequest, ValidationCreateResponse>(input);
+        }
+
+        public async Task<WalletProposeResponse> WalletPropose(WalletProposeRequest input)
+        {
+            return await GetJsonFromContent<WalletProposeRequest, WalletProposeResponse>(input);
         }
 
         #endregion
