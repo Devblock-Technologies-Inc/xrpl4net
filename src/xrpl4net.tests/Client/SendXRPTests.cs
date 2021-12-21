@@ -67,6 +67,9 @@ namespace Xrpl4net.Tests.Client
             var ledgerResult = ledgerResponse.result;
             var validatedLedger = ledgerResult.ledger_index;
 
+            // Construct a Payment
+
+
             // Sign transaction -----------------------------------------------------------
 
         }

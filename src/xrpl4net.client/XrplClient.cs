@@ -9,6 +9,7 @@ using Xrpl4net.Client.Models.Ledger;
 using Xrpl4net.Client.Models.PathOrderBook;
 using Xrpl4net.Client.Models.PaymentChannel;
 using Xrpl4net.Client.Models.ServerInfo;
+using Xrpl4net.Client.Models.Signing;
 using Xrpl4net.Client.Models.Transactions;
 
 namespace Xrpl4net.Client
@@ -182,6 +183,16 @@ namespace Xrpl4net.Client
         public async Task<WalletProposeResponse> WalletPropose(WalletProposeRequest input)
         {
             return await GetJsonFromContent<WalletProposeRequest, WalletProposeResponse>(input);
+        }
+
+        public async Task<SignResponse> Sign(SignRequest input)
+        {
+            return await GetJsonFromContent<SignRequest, SignResponse>(input);
+        }
+
+        public async Task<SignResponse> SignFor(SignForRequest input)
+        {
+            return await GetJsonFromContent<SignForRequest, SignResponse>(input);
         }
 
         #endregion
