@@ -12,11 +12,13 @@ namespace Xrpl4net.Tests.Client
     public abstract class XrplClientTest : BaseXRPL4NetTest
     {
         protected XrplClient _xrplClient;
+        protected FaucetClient _faucetClient;
 
         [SetUp]
         public virtual void SetUp()
         {
-            _xrplClient = new XrplClient("http://s1.ripple.com:51234/");
+            _xrplClient = new XrplClient("https://s.altnet.rippletest.net:51234/");
+            _faucetClient = new FaucetClient("https://faucet.altnet.rippletest.net");
         }
     }
 }

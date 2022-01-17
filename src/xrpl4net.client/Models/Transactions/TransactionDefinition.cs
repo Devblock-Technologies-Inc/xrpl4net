@@ -14,13 +14,13 @@ namespace Xrpl4net.Client.Models.Transactions
 
         public string Destination { get; set; }
 
-        public Amount Amount { get; set; }
+        public string Amount { get; set; }
 
         public string Fee { get; set; }
 
-        public int Flags { get; set; }
+        public long Flags { get; set; }
 
-        public int Sequence { get; set; }
+        public long Sequence { get; set; }
 
         public string SigningPubKey { get; set; }
 
