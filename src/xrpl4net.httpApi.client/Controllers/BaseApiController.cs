@@ -11,6 +11,7 @@ namespace xrpl4net.httpApi.client.Controllers
 
         protected XrplClient _xrplClient;
         protected FaucetClient _faucetClient;
+        protected const string Secret = "sEd7rBGm5kxzauRTAV2hbsNz7N45X91";
 
         #endregion
 
