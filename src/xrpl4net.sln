@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xrpl4net.tests", "xrpl4net.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xrpl4net.httpApi.client", "xrpl4net.httpApi.client\xrpl4net.httpApi.client.csproj", "{134933EE-A7C4-4EE6-8415-5D07C52D1837}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xrp4Net.WebApplication.Demo", "Xrp4Net.WebApplication.Demo\Xrp4Net.WebApplication.Demo.csproj", "{849F5DEA-0BE2-4DDD-A3AE-1B0735A7C138}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{134933EE-A7C4-4EE6-8415-5D07C52D1837}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{134933EE-A7C4-4EE6-8415-5D07C52D1837}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{134933EE-A7C4-4EE6-8415-5D07C52D1837}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849F5DEA-0BE2-4DDD-A3AE-1B0735A7C138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849F5DEA-0BE2-4DDD-A3AE-1B0735A7C138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849F5DEA-0BE2-4DDD-A3AE-1B0735A7C138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849F5DEA-0BE2-4DDD-A3AE-1B0735A7C138}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

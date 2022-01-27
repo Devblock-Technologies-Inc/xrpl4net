@@ -1,0 +1,182 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Send XRP</h1>
+    <p>Send a Payment on the Test Net</p>
+</div>
+
+<div class="col-12">
+    <div class="step-app" id="send-xrp">
+      <ul class="step-steps">
+        <li data-step-target="step1">Generate</li>
+        <li data-step-target="step2">Connect</li>
+        <li data-step-target="step3">Prepare</li>
+        <li data-step-target="step4">Sign</li>
+        <li data-step-target="step5">Submit</li>
+        <li data-step-target="step6">Wait</li>
+        <li data-step-target="step7">Check</li>
+      </ul>
+      <div class="step-content">
+        <div class="step-tab-panel" data-step="step1">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnGetCredentails" type="button" class="btn btn-primary">Get testnet credentails</button>
+                </div>
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="rKQM5eRKXVQPwSYGHh5ttmLcadUa8Xcba2" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Secret</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="sn8XB3ncEdzUVSnfX6SEjFS38iXiZ" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Balance</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="1,000 XRP" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="step-tab-panel" data-step="step2">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnConnect" type="button" class="btn btn-primary">Connect to test</button>
+                </div>
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Connection status</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="Connected" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="step-tab-panel" data-step="step3">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnPrepare" type="button" class="btn btn-primary">Prepare example transaction</button>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Prepared transaction instructions</label>
+                        <pre>
+                            <code></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-tab-panel" data-step="step4">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnSign" type="button" class="btn btn-primary">Sign example transaction</button>
+                </div>
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Signed Transaction blob</label>
+                            <div class="col-sm-9">
+                                <code style="overflow-wrap: anywhere; word-wrap: anywhere">
+                                    120000220000000024017A1923201B017A197A6140000000014FB18068400000000000000C73210313144DABFDFCAEA345A327160B0B12C5090492070A896E182A352A9937B443BC74473045022100BBBB4BA4983B744CE8587F72B08478C9350D8CA4B5C5F3225C9AEBA81432EB0A022022E7D5E2D122F4360D29EA14DF5EF98541A075CA20FFF97ABC24EB5673E9AE538114F545B6210E6FDAF7CEA3B7407C065965767CC0298314F667B0CA50CC7709A220B0561B85E53A48461FA8
+                                </code>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Identifying hash</label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly class="form-control-plaintext" value="49B9A0AFC83D210BF55EA739ADD5CFE353E031B9C035663E361A025EA2332720" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="step-tab-panel" data-step="step5">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnSubmit" type="button" class="btn btn-primary">Submit example transaction</button>
+                </div>
+                <div class="col-md-12">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="step-tab-panel" data-step="step6">
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Transaction ID</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" value="DE347DAE8C6906B11E2310FE737B212E4F1D02F99653598C4E94D8450EE69EFC" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Latest Validated Ledger Index</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" value="24779253" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Ledger Index at Time of Submission</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" value="24778731" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Transaction LastLedgerSequence</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" value="24778778" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Final Result</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" value="tesSUCCESS " />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="step-tab-panel" data-step="step7">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnCheck" type="button" class="btn btn-primary">Check transaction status</button>
+                </div>
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Transaction result code</label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly class="form-control-plaintext" value="tesSUCCESS  " />
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="form-group">
+                        <label>Balance changes</label>
+                        <pre>
+                            <code></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
