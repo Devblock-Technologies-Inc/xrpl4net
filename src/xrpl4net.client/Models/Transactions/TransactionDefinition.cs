@@ -27,6 +27,8 @@ namespace Xrpl4net.Client.Models.Transactions
         public string TxnSignature { get; set; }
 
         public string hash { get; set; }
+
+        public long LastLedgerSequence { get; set; }
     }
 
     public class Amount

@@ -15,7 +15,7 @@ namespace xrpl4net.httpApi.client.Controllers
     {
         [HttpGet]
         [Route("construct-payment")]
-        public async Task<PaymentModel> PrepareTransaction(string classicAddress) 
+        public async Task<PaymentModel> PrepareTransaction(string classicAddress, long amount) 
         {
             var accountInfoRequest = new AccountInfoRequest
             {
@@ -42,7 +42,7 @@ namespace xrpl4net.httpApi.client.Controllers
             var payment = new PaymentModel
             {
                 Account = classicAddress,
-                Amount = 1000,
+                Amount = amount,
                 Destination = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
                 Fee = openLedgerFee,
                 Flags = 2147483648,
@@ -51,6 +51,18 @@ namespace xrpl4net.httpApi.client.Controllers
             };
 
             return payment;
+        }
+
+        [HttpPost]
+        [Route("sign")]
+        public dynamic SignTransaction(PaymentModel input)
+        {
+            SignedTx signedPayment = TxSigner.SignJson(JObject.Parse(JsonConvert.SerializeObject(input)), Secret);
+            return new
+            {
+                hash = signedPayment.Hash,
+                txtBlob = signedPayment.TxBlob
+            };
         }
 
         [HttpPost]
@@ -73,6 +85,7 @@ namespace xrpl4net.httpApi.client.Controllers
         }
 
         [HttpGet]
+        [Route("check")]
         public async Task<TXResponse> TransactionResult(string hash)
         {
             var request = new TXRequest

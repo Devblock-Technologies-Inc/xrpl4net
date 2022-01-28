@@ -26,7 +26,10 @@ namespace xrpl4net.httpApi.client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "XRP Api", Version = "v1" });
@@ -40,7 +43,10 @@ namespace xrpl4net.httpApi.client
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(x => x.AllowAnyMethod()
+                              .AllowAnyHeader()
+                              .SetIsOriginAllowed(origin => true) 
+                              .AllowCredentials());
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "XRP Api"));
             app.UseHttpsRedirection();

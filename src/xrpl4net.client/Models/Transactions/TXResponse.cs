@@ -17,12 +17,25 @@ namespace Xrpl4net.Client.Models.Transactions
 
         public string Fee { get; set; }
 
-        public int Flags { get; set; }
+        public long Flags { get; set; }
 
-        public int LastLedgerSequence { get; set; }
+        public long LastLedgerSequence { get; set; }
 
-        public int OfferSequence { get; set; }
+        public long OfferSequence { get; set; }
 
-        public int Sequence { get; set; }
+        public long Sequence { get; set; }
+
+        public string status { get; set; }
+
+        public bool validated { get; set; }
+
+        public Meta meta { get; set; }
+    }
+
+    public class Meta
+    {
+        public string TransactionResult { get; set; }
+
+        public uint TransactionIndex { get; set; }
     }
 }
