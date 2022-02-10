@@ -37,5 +37,7 @@ namespace Xrpl4net.Client.Models.Transactions
         public string TransactionResult { get; set; }
 
         public uint TransactionIndex { get; set; }
+
+        public uint delivered_amount { get; set; }
     }
 }

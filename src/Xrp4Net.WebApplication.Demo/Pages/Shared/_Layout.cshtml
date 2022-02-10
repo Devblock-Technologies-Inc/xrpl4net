@@ -52,9 +52,11 @@
                     url: "https://localhost:44391/api/xrp4net/Account/get-credentails",
                     beforeSend: function (xhr) {
                         $("#accountInfo").html('');
+                        reset();
                     },
                     success: function (response) {
                         $("#accountInfo").html($("#accountInfoTemplate").render(response));
+                        $("#hdfNextStep2").val('true');
                     },
                     failure: function (response) {
 
@@ -66,8 +68,10 @@
 
             $("#btnConnect").click(function () {
                 $("#txtConnectionStatus").val('Connecting');
+                $("#hdfNextStep3").val('false');
                 setTimeout(function (){
                   $("#txtConnectionStatus").val('Connected');
+                  $("#hdfNextStep3").val('true');
                 }, 1000);
             });
 
@@ -77,11 +81,13 @@
                     url: "https://localhost:44391/api/xrp4net/Transaction/construct-payment?classicAddress=" + $("#txtAddress").val() + "&amount=" + (parseInt($("#xrp-amount").val()) * 1000000),
                     beforeSend: function (xhr) {
                         $("#paymentConstruction").html('');
+                        $("#hdfNextStep4").val('false');
                     },
                     success: function (response) {
                         var prettyJson = JSON.stringify(response,undefined, 2);
                         $("#paymentConstruction").html($("#paymentTemplate").render(response));
                         $("#payment-construct").text(prettyJson);
+                        $("#hdfNextStep4").val('true');
                     },
                     failure: function (response) {
                         
@@ -106,13 +112,16 @@
                         fee: payment.fee,
                         flags: payment.flags,
                         sequence: payment.sequence,
-                        transactionType: payment.transactionType
+                        transactionType: payment.transactionType,
+                        secret: $("#txtSecret").val()
                     }),
                     beforeSend: function (xhr) {
                         $("#signTransaction").html('');
+                        $("#hdfNextStep5").val('false');
                     },
                     success: function (response) {
                         $("#signTransaction").html($("#signTransactionTemplate").render(response));
+                        $("#hdfNextStep5").val('true');
                     },
                     failure: function (response) {
 
@@ -136,17 +145,21 @@
                         fee: payment.fee,
                         flags: payment.flags,
                         sequence: payment.sequence,
-                        transactionType: payment.transactionType
+                        transactionType: payment.transactionType,
+                        secret: $("#txtSecret").val()
                     }),
                     beforeSend: function (xhr) {
                         $("#submitTransaction").html('');
                         $("#waitResult").html('');
+                        $("#hdfNextStep6").val('false');
                     },
                     success: function (response) {
                         var prettyJson = JSON.stringify(response,undefined,2);
                         $("#submitTransaction").html($("#submitTransactionTemplate").render(response));
                         $("#submit-result").text(prettyJson);
                         $("#waitResult").html($("#waitTemplate").render(response));
+                        $("#hdfNextStep6").val('true');
+                        $("#hdfNextStep7").val('true');
                     },
                     failure: function (response) {
 
@@ -162,10 +175,11 @@
                     url: "https://localhost:44391/api/xrp4net/Transaction/check?hash=" + $("#txtTransactionID").val(),
                     beforeSend: function (xhr) {
                         $("#checkResult").html('');
+                        $("#hdfNextStep7").val('false');
                     },
                     success: function (response) {
                         $("#checkResult").html($("#checkTemplate").render(response));
-
+                        $("#hdfNextStep7").val('true');
                     },
                     failure: function (response) {
                         
@@ -179,6 +193,43 @@
 
         $('#send-xrp').steps({
             onChange: function (currentIndex, newIndex, stepDirection) {
+
+                if (currentIndex === 0) {
+                    if (stepDirection === 'forward' || stepDirection === 'none') {
+                        return $("#hdfNextStep2").val() === 'true';
+                    }
+                }
+
+                if (currentIndex === 1) {
+                    if (stepDirection === 'forward' || stepDirection === 'none') {
+                        return $("#hdfNextStep3").val() === 'true';
+                    }
+                }
+
+                if (currentIndex === 2) {
+                    if (stepDirection === 'forward' || stepDirection === 'none') {
+                        return $("#hdfNextStep4").val() === 'true';
+                    }
+                }
+
+                if (currentIndex === 3) {
+                    if (stepDirection === 'forward' || stepDirection === 'none') {
+                        return $("#hdfNextStep5").val() === 'true';
+                    }
+                }
+
+                if (currentIndex === 4) {
+                    if (stepDirection === 'forward' || stepDirection === 'none') {
+                        return $("#hdfNextStep6").val() === 'true';
+                    }
+                }
+
+                if (currentIndex === 5) {
+                    if (stepDirection === 'forward' || stepDirection === 'none') {
+                        return $("#hdfNextStep7").val() === 'true';
+                    }
+                }
+
                 return true;
             },
             showFooterButtons: false,
@@ -186,6 +237,22 @@
 
             }
         });
+
+        function reset() {
+            $("#hdfNextStep2").val('false');
+            $("#hdfNextStep3").val('false');
+            $("#hdfNextStep4").val('false');
+            $("#hdfNextStep5").val('false');
+            $("#hdfNextStep6").val('false');
+            $("#hdfNextStep7").val('false');
+
+            $("#accountInfo").html('');
+            $("#paymentConstruction").html('');
+            $("#signTransaction").html('');
+            $("#submitTransaction").html('');
+            $("#waitResult").html('');
+            $("#checkResult").html('');
+        }
     </script>
 
     <script id="accountInfoTemplate" type="text/x-jsrender">
@@ -199,7 +266,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Secret</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="sEd7rBGm5kxzauRTAV2hbsNz7N45X91" />
+                    <input id="txtSecret" type="text" readonly class="form-control-plaintext" value="{{>secret}}" />
                 </div>
             </div>
             <div class="form-group row">

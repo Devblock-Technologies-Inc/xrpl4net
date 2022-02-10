@@ -57,7 +57,17 @@ namespace xrpl4net.httpApi.client.Controllers
         [Route("sign")]
         public dynamic SignTransaction(PaymentModel input)
         {
-            SignedTx signedPayment = TxSigner.SignJson(JObject.Parse(JsonConvert.SerializeObject(input)), Secret);
+            dynamic payment = new
+            {
+                Account = input.Account,
+                Amount = input.Amount,
+                Destination = input.Destination,
+                Fee = input.Fee,
+                Flags = input.Flags,
+                Sequence = input.Sequence,
+                TransactionType = "Payment"
+            };
+            SignedTx signedPayment = TxSigner.SignJson(JObject.Parse(JsonConvert.SerializeObject(payment)), input.Secret);
             return new
             {
                 hash = signedPayment.Hash,
@@ -69,7 +79,17 @@ namespace xrpl4net.httpApi.client.Controllers
         [Route("submit")]
         public async Task<SubmitResult> Submit(PaymentModel input)
         {
-            SignedTx signedPayment = TxSigner.SignJson(JObject.Parse(JsonConvert.SerializeObject(input)), Secret);
+            dynamic payment = new
+            {
+                Account = input.Account,
+                Amount = input.Amount,
+                Destination = input.Destination,
+                Fee = input.Fee,
+                Flags = input.Flags,
+                Sequence = input.Sequence,
+                TransactionType = "Payment"
+            };
+            SignedTx signedPayment = TxSigner.SignJson(JObject.Parse(JsonConvert.SerializeObject(payment)), input.Secret);
             var submitResponse = await _xrplClient.Submit(new SubmitRequest
             {
                 Params = new List<SubmitRequestParams>

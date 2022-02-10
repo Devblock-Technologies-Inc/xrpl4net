@@ -10,6 +10,7 @@ namespace Xrpl4net.Client.Models.Faucet
     {
         public Account account { get; set; }
 
+        public string secret { get; set; }
         public long amount { get; set; }
     }
 

@@ -25,7 +25,7 @@ namespace xrpl4net.httpApi.client.Controllers
         [Route("get-credentails")]
         public async Task<FaucetAccountResponse> GetAccountCredentails()
         {
-            var seed = Seed.FromBase58(Secret);
+            var seed = Seed.FromRandom();
             var pair = seed.KeyPair();
             var classicAddress = pair.Id();
             var fundAccountRequest = new FundAccountRequest
@@ -33,6 +33,7 @@ namespace xrpl4net.httpApi.client.Controllers
                 destination = classicAddress
             };
             var fundAccountResponse = await _faucetClient.FundAccount(fundAccountRequest);
+            fundAccountResponse.secret = seed.ToString();
             return fundAccountResponse;
         }
 

@@ -15,5 +15,7 @@
         public int Sequence { get; set; }
 
         public string TransactionType { get; set; }
+
+        public string Secret { get; set; }
     }
 }
