@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - xrpl4net.application.demo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/jquery-steps.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Send XRP
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-steps/jquery-steps.js"></script>
+    <script src="~/lib/js-render/jsrender.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#send-xrp').steps({
+                onChange: function (currentIndex, newIndex, stepDirection) {
+
+                    if (currentIndex === 0) {
+                        if (stepDirection === 'forward' || stepDirection === 'none') {
+                            return $("#hdfNextStep2").val() === 'true';
+                        }
+                    }
+
+                    if (currentIndex === 1) {
+                        if (stepDirection === 'forward' || stepDirection === 'none') {
+                            return $("#hdfNextStep3").val() === 'true';
+                        }
+                    }
+
+                    if (currentIndex === 2) {
+                        if (stepDirection === 'forward' || stepDirection === 'none') {
+                            return $("#hdfNextStep4").val() === 'true';
+                        }
+                    }
+
+                    if (currentIndex === 3) {
+                        if (stepDirection === 'forward' || stepDirection === 'none') {
+                            return $("#hdfNextStep5").val() === 'true';
+                        }
+                    }
+
+                    if (currentIndex === 4) {
+                        if (stepDirection === 'forward' || stepDirection === 'none') {
+                            return $("#hdfNextStep6").val() === 'true';
+                        }
+                    }
+
+                    if (currentIndex === 5) {
+                        if (stepDirection === 'forward' || stepDirection === 'none') {
+                            return $("#hdfNextStep7").val() === 'true';
+                        }
+                    }
+
+                    return true;
+                },
+                showFooterButtons: false,
+                onFinish: function () {
+
+                }
+            });
+
+            $("#btnGetCredentails").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetAccountCredentails","Account")',
+                    beforeSend: function (xhr) {
+                        $("#accountInfo").html('');
+                        reset();
+                    },
+                    success: function (response) {
+                        $("#accountInfo").html($("#accountInfoTemplate").render(response));
+                        $("#hdfNextStep2").val('true');
+                    },
+                    failure: function (response) {
+
+                    },
+                    error: function (response) {
+                    }
+                });
+            });
+
+            $("#btnConnect").click(function () {
+                $("#txtConnectionStatus").val('Connecting');
+                $("#hdfNextStep3").val('false');
+                setTimeout(function (){
+                  $("#txtConnectionStatus").val('Connected');
+                  $("#hdfNextStep3").val('true');
+                }, 1000);
+            });
+
+            $("#btnPrepare").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("PrepareTransaction","Transaction")',
+                    data: { 
+                        classicAddress : $("#txtAddress").val(),
+                        amount: (parseInt($("#xrp-amount").val()) * 1000000)
+                    },
+                    beforeSend: function (xhr) {
+                        $("#paymentConstruction").html('');
+                        $("#hdfNextStep4").val('false');
+                    },
+                    success: function (response) {
+                        var prettyJson = JSON.stringify(response,undefined, 2);
+                        $("#paymentConstruction").html($("#paymentTemplate").render(response));
+                        $("#payment-construct").text(prettyJson);
+                        $("#hdfNextStep4").val('true');
+                    },
+                    failure: function (response) {
+                        
+                    },
+                    error: function (response) {
+                        
+                    }
+                });
+            });
+
+            $("#btnSign").click(function () {
+                var payment = JSON.parse($("#payment-construct").text());
+                console.log(payment);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SignTransaction","Transaction")',
+                    data: { 
+                        Account: payment.account,
+                        Amount: payment.amount,
+                        Destination: payment.destination,
+                        Fee: payment.fee,
+                        Flags: payment.flags,
+                        Sequence: payment.sequence,
+                        TransactionType: payment.transactionType,
+                        Secret: $("#txtSecret").val()
+                    },
+                    beforeSend: function (xhr) {
+                        $("#signTransaction").html('');
+                        $("#hdfNextStep5").val('false');
+                    },
+                    success: function (response) {
+                        $("#signTransaction").html($("#signTransactionTemplate").render(response));
+                        $("#hdfNextStep5").val('true');
+                    },
+                    failure: function (response) {
+
+                    },
+                    error: function (response) {
+                    }
+                });
+            });
+
+            $("#btnSubmit").click(function () {
+                var payment = JSON.parse($("#payment-construct").text());
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Submit","Transaction")',
+                    data: { 
+                        Account: payment.account,
+                        Amount: payment.amount,
+                        Destination: payment.destination,
+                        Fee: payment.fee,
+                        Flags: payment.flags,
+                        Sequence: payment.sequence,
+                        TransactionType: payment.transactionType,
+                        Secret: $("#txtSecret").val()
+                    },
+                    beforeSend: function (xhr) {
+                        $("#submitTransaction").html('');
+                        $("#waitResult").html('');
+                        $("#hdfNextStep6").val('false');
+                    },
+                    success: function (response) {
+                        var prettyJson = JSON.stringify(response,undefined,2);
+                        $("#submitTransaction").html($("#submitTransactionTemplate").render(response));
+                        $("#submit-result").text(prettyJson);
+                        $("#waitResult").html($("#waitTemplate").render(response));
+                        $("#hdfNextStep6").val('true');
+                        setTimeout(function (){
+                          checkTransaction();
+                        }, 500);
+                    },
+                    failure: function (response) {
+
+                    },
+                    error: function (response) {
+                    }
+                });
+            });
+
+            $("#btnCheck").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetTransactionResult","Transaction")',
+                    data: { hash : $("#txtTransactionID").val() },
+                    beforeSend: function (xhr) {
+                        $("#checkResult").html('');
+                    },
+                    success: function (response) {
+                        $("#checkResult").html($("#checkTemplate").render(response));
+                        var prettyJson = JSON.stringify(response.result,undefined,2);
+                        $("#transaction-result").text(prettyJson);
+                    },
+                    failure: function (response) {
+                        
+                    },
+                    error: function (response) {
+                        
+                    }
+                });
+            });
+        });
+
+        function reset() {
+            $("#hdfNextStep2").val('false');
+            $("#hdfNextStep3").val('false');
+            $("#hdfNextStep4").val('false');
+            $("#hdfNextStep5").val('false');
+            $("#hdfNextStep6").val('false');
+            $("#hdfNextStep7").val('false');
+
+            $("#accountInfo").html('');
+            $("#paymentConstruction").html('');
+            $("#signTransaction").html('');
+            $("#submitTransaction").html('');
+            $("#waitResult").html('');
+            $("#checkResult").html('');
+        }
+
+        function checkTransaction() {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("CheckTransactionResult","Transaction")',
+                data: { hash : $("#txtTransactionID").val() },
+                beforeSend: function (xhr) {
+                    $("#hdfNextStep7").val('false');
+                },
+                success: function (response) {
+                    if(response === true) {
+                        $("#hdfNextStep7").val('true');
+                        $("#txtFinalResult").val("tesSUCCESS (Validated)");
+                    }
+                    else
+                        checkTransaction();
+                },
+                failure: function (response) {     
+                },
+                error: function (response) {
+                }
+            });
+        }
+    </script>
+
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

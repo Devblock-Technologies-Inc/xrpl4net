@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Send XRP</h1>
+    <p>Send a Payment on the Test Net</p>
+</div>
+
+<div class="col-12">
+    <div class="step-app" id="send-xrp">
+      <ul class="step-steps">
+        <li data-step-target="step1">Generate</li>
+        <li data-step-target="step2">Connect</li>
+        <li data-step-target="step3">Prepare</li>
+        <li data-step-target="step4">Sign</li>
+        <li data-step-target="step5">Submit</li>
+        <li data-step-target="step6">Wait</li>
+        <li data-step-target="step7">Check</li>
+      </ul>
+      <div class="step-content">
+        <div class="step-tab-panel" data-step="step1">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnGetCredentails" type="button" class="btn btn-primary">Get testnet credentails</button>
+                </div>
+                <div class="col-md-12" id="accountInfo">
+                </div>
+            </div>
+            <input type="hidden" id="hdfNextStep2" value="false" />
+        </div>
+        <div class="step-tab-panel" data-step="step2">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnConnect" type="button" class="btn btn-primary">Connect to test</button>
+                </div>
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Connection status</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="txtConnectionStatus" readonly class="form-control-plaintext" value="Not connected" />
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+            <input type="hidden" id="hdfNextStep3" value="false" />
+        </div>
+        <div class="step-tab-panel" data-step="step3">
+            <div class="row">
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Send</label>
+                            <div class="col-sm-10">
+                                <input id="xrp-amount" type="number" step="any" max="100000000000" min=".000001" value="22" class="form-control"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12">
+                    <button id="btnPrepare" type="button" class="btn btn-primary">Prepare example transaction</button>
+                </div>
+                <div class="col-md-12" id="paymentConstruction">
+
+                </div>
+            </div>
+            <input type="hidden" id="hdfNextStep4" value="false" />
+        </div>
+        <div class="step-tab-panel" data-step="step4">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnSign" type="button" class="btn btn-primary">Sign example transaction</button>
+                </div>
+                <div class="col-md-12" id="signTransaction">
+                    
+                </div>
+            </div>
+            <input type="hidden" id="hdfNextStep5" value="false" />
+        </div>
+        <div class="step-tab-panel" data-step="step5">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnSubmit" type="button" class="btn btn-primary">Submit example transaction</button>
+                </div>
+                <div class="col-md-12" id="submitTransaction">
+                    
+                </div>
+            </div>
+            <input type="hidden" id="hdfNextStep6" value="false" />
+        </div>
+        <div class="step-tab-panel" data-step="step6">
+            <div class="row">
+                <div class="col-md-12" id="waitResult"></div>
+            </div>
+            <input type="hidden" id="hdfNextStep7" value="false" />
+        </div>
+        <div class="step-tab-panel" data-step="step7">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnCheck" type="button" class="btn btn-primary">Check transaction status</button>
+                </div>
+                <div class="col-md-12" id="checkResult">
+                    
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script id="accountInfoTemplate" type="text/x-jsrender">
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+                <input id="txtAddress" type="text" readonly class="form-control-plaintext" value="{{>account.classicAddress}}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Secret</label>
+            <div class="col-sm-10">
+                <input id="txtSecret" type="text" readonly class="form-control-plaintext" value="{{>secret}}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Balance</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control-plaintext" value="{{>amount}} XRP" />
+            </div>
+        </div>
+    </form>
+</script>
+
+<script id="paymentTemplate" type="text/x-jsrender">
+    <div class="form-group">
+        <label>Prepared transaction instructions</label>
+        <pre id="payment-construct">
+        </pre>
+    </div>
+</script>
+
+<script id="signTransactionTemplate" type="text/x-jsrender">
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Signed Transaction blob</label>
+            <div class="col-sm-9">
+                <code style="overflow-wrap: anywhere; word-wrap: anywhere">
+                    {{>txtBlob}}
+                </code>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Identifying hash</label>
+            <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="{{>hash}}" />
+            </div>
+        </div>
+    </form>
+</script>
+
+<script id="submitTransactionTemplate" type="text/x-jsrender">
+    <div class="form-group">
+        <label>Preliminary result</label>
+        <pre id="submit-result">
+        </pre>
+    </div>
+</script>
+
+<script id="waitTemplate" type="text/x-jsrender">
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Transaction ID</label>
+            <div class="col-sm-8">
+                <input type="text" id="txtTransactionID" readonly class="form-control-plaintext" value="{{>tx_json.hash}}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Latest Validated Ledger Index</label>
+            <div class="col-sm-8">
+                <input type="text" readonly class="form-control-plaintext" value="" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Ledger Index at Time of Submission</label>
+            <div class="col-sm-8">
+                <input type="text" readonly class="form-control-plaintext" value="{{>validated_ledger_index}}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Transaction LastLedgerSequence</label>
+            <div class="col-sm-8">
+                <input type="text" readonly class="form-control-plaintext" value="{{>tx_json.lastLedgerSequence}}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Final Result</label>
+            <div class="col-sm-8">
+                <input id="txtFinalResult" type="text" readonly class="form-control-plaintext" value="Still pending" />
+            </div>
+        </div>
+    </form>
+</script>
+
+<script id="checkTemplate" type="text/x-jsrender">
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Transaction result code</label>
+            <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="{{>result.meta.transactionResult}}" />
+            </div>
+        </div>
+    </form>
+
+    <div class="form-group">
+        <label>Balance changes</label>
+        <pre id="transaction-result">
+            <code></code>
+        </pre>
+    </div>
+</script>
