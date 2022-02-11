@@ -106,7 +106,28 @@ namespace xrpl4net.httpApi.client.Controllers
 
         [HttpGet]
         [Route("check")]
-        public async Task<TXResponse> TransactionResult(string hash)
+        public async Task<bool> CheckTransactionResult(string hash)
+        {
+            var request = new TXRequest
+            {
+                Params = new List<TXRequestParams>
+                {
+                    new TXRequestParams
+                    {
+                        transaction = hash
+                    }
+                }.ToArray()
+            };
+
+            var response = await _xrplClient.TXRequest(request);
+            if (response.result == null || response.result.meta == null)
+                return false;
+            return response.result.validated;
+        }
+
+        [HttpGet]
+        [Route("get-transaction")]
+        public async Task<TXResponse> GetTransactionResult(string hash)
         {
             var request = new TXRequest
             {

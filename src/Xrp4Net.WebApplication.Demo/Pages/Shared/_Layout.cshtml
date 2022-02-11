@@ -159,7 +159,9 @@
                         $("#submit-result").text(prettyJson);
                         $("#waitResult").html($("#waitTemplate").render(response));
                         $("#hdfNextStep6").val('true');
-                        $("#hdfNextStep7").val('true');
+                        setTimeout(function (){
+                          checkTransaction();
+                        }, 500);
                     },
                     failure: function (response) {
 
@@ -172,14 +174,14 @@
             $("#btnCheck").click(function () {
                 $.ajax({
                     type: "GET",
-                    url: "https://localhost:44391/api/xrp4net/Transaction/check?hash=" + $("#txtTransactionID").val(),
+                    url: "https://localhost:44391/api/xrp4net/Transaction/get-transaction?hash=" + $("#txtTransactionID").val(),
                     beforeSend: function (xhr) {
                         $("#checkResult").html('');
-                        $("#hdfNextStep7").val('false');
                     },
                     success: function (response) {
                         $("#checkResult").html($("#checkTemplate").render(response));
-                        $("#hdfNextStep7").val('true');
+                        var prettyJson = JSON.stringify(response.result,undefined,2);
+                        $("#transaction-result").text(prettyJson);
                     },
                     failure: function (response) {
                         
@@ -252,6 +254,28 @@
             $("#submitTransaction").html('');
             $("#waitResult").html('');
             $("#checkResult").html('');
+        }
+
+        function checkTransaction() {
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:44391/api/xrp4net/Transaction/check?hash=" + $("#txtTransactionID").val(),
+                beforeSend: function (xhr) {
+                    $("#hdfNextStep7").val('false');
+                },
+                success: function (response) {
+                    if(response === true) {
+                        $("#hdfNextStep7").val('true');
+                        $("#txtFinalResult").val("tesSUCCESS (Validated)");
+                    }
+                    else
+                        checkTransaction();
+                },
+                failure: function (response) {     
+                },
+                error: function (response) {
+                }
+            });
         }
     </script>
 
@@ -342,7 +366,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Final Result</label>
                 <div class="col-sm-8">
-                    <input type="text" readonly class="form-control-plaintext" value="{{>engine_result}}" />
+                    <input id="txtFinalResult" type="text" readonly class="form-control-plaintext" value="Still pending" />
                 </div>
             </div>
         </form>
@@ -360,7 +384,7 @@
 
         <div class="form-group">
             <label>Balance changes</label>
-            <pre>
+            <pre id="transaction-result">
                 <code></code>
             </pre>
         </div>
