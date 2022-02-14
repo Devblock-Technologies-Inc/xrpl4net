@@ -204,7 +204,7 @@ namespace Xrpl4net.Client
             where Tm : class
         {
             var request = JsonConvert.SerializeObject(input);
-            var response = await HttpClientExtensions.PostJsonContent(_httpClient, _uri, request);
+            var response = await _httpClient.PostJsonContent(_uri, request);
             var result = JsonConvert.DeserializeObject<Tm>(response);
 
             return result;

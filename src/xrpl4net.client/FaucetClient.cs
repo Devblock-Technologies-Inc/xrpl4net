@@ -34,7 +34,7 @@ namespace Xrpl4net.Client
         public async Task<FaucetAccountResponse> FundAccount(FundAccountRequest input)
         {
             var request = JsonConvert.SerializeObject(input);
-            var response = await HttpClientExtensions.PostJsonContent(_httpClient, $"{_uri}/accounts", request);
+            var response = await _httpClient.PostJsonContent($"{_uri}/accounts", request);
             var result = JsonConvert.DeserializeObject<FaucetAccountResponse>(response);
             return result;
         }
